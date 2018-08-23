@@ -1,0 +1,58 @@
+<div class="container">
+
+
+    <div class="row">
+        <br>
+        <div class="col-md-6">
+            {{!-- looping thru the burgers data --}} {{#each burgerBd}} {{#unless this.devoured}}
+
+            <div class="col-xs-9">
+                <!-- display the id (number) and burger_name of each burger on html -->
+                <pre>{{this.id}}. {{this.burger_name}}</pre>
+            </div>
+
+            <div class="col-xs-3 text-center">
+                <!-- creates button that gives button id and burger name back to server, unless devoured is TRUE -->
+                <form action="/update/{{this.id}}?_method=PUT" method="POST">
+                    <input type="hidden" name="burger_id" type="text" value={{this.id}}>
+                    <button type="submit" data-id="{{this.id}}" class="btn btn-success devour">DEVOUR IT</button>
+                </form>
+            </div> 
+
+            {{/unless}} {{/each}}
+
+
+        </div>
+
+        <div class="col-xs-6">
+
+            <div class="col-md-6 text-center" id="burgers_eaten">
+                {{#each burgerData}} {{#if this.devoured}}
+                <input class="form-control" type="text" placeholder="{{this.id}}. {{this.burger_name}}" readonly> {{/if}} {{/each}}
+            </div>
+        </div>
+
+
+
+    </div>
+
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4 text-center enter-section">
+            <p>What Burger Are You Ordering?</p>
+            <br>
+            <form action="/burgers/create" method="POST">
+                <input type="text" name="burger_name" class="form-control" value="">
+                <br>
+                <div class="row">
+                    <div class="col-md-4 col-md-offset-4">
+                        <button type="submit" class="btn btn-primary">SUBMIT</button>
+                    </div>
+                </div>
+            </form>
+
+            <br>
+        </div>
+    </div>
+    <hr>
+</div>
+
